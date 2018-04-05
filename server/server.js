@@ -1,3 +1,5 @@
+require('./config/config');
+
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -9,7 +11,7 @@ const {User} = require('./models/user');
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -19,9 +21,9 @@ app.post('/todos', (req, res) => {
     });
 
     todo.save().then((doc) => {
-        res.send(doc); // send created object back
+        res.send(doc);
     }, (err) => {
-        res.status(400).send(err); // send error back
+        res.status(400).send(err);
     });
 })
 
